@@ -1,37 +1,60 @@
-## Welcome to GitHub Pages
+# WMIQUERY Function
 
-You can use the [editor on GitHub](https://github.com/nftools/wmiQuery/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Allows you to get any wmi Query out as a vfp object 
+using a simple function call.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+     wmiQuery( wmiQuery [, wmiClass] )
+ 
+### Parameters
 
-### Markdown
+**wmiQuery**
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Any valid WMI Query 
 
-```markdown
-Syntax highlighted code block
+**wmiClass**
 
-# Header 1
-## Header 2
-### Header 3
+Specify the wmiClass name; defaults to "CIMV2"
 
-- Bulleted
-- List
+### Return Value: 
 
-1. Numbered
-2. List
+Object. 
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+	Result object schema ( nxs format https://github.com/nftools/nxs ): 
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+    .oWmiResult:
+      .count = i
+      .items[]
+        -item = v
+    
+### Sample procedure ( included in wmiquery.prg ): 
 
-### Jekyll Themes
+    *---------------------------------------------------------------------------------
+    Procedure testme 
+    * note:
+    * this code uses underscore ( _.prg ) as modern replacement for addproperty()
+    * available at https://raw.githubusercontent.com/nftools/underscore/master/_.prg
+    * a traditional version ( "testme_no_" ) using "addobject" is also included 
+    *---------------------------------------------------------------------------------
+    Public oinfo
+    
+    oinfo = Create('empty')
+    
+    Wait 'Running WMI Query....please wait.. ' Window Nowait At Wrows()/2,Wcols()/2
+    
+    
+    With _( m.oinfo )
+       .monitors  =  wmiquery('Win32_PNPEntity where service = "monitor"')
+       .diskdrive =  wmiquery('Win32_diskDrive')
+       .startup   =  wmiquery('Win32_startupCommand')
+       .BaseBoard =  wmiquery('Win32_baseBoard') 
+       .netAdaptersConfig = wmiquery('Win32_NetworkAdapterConfiguration')
+    Endwith
+    
+    
+    Messagebox( 'Please explore "oInfo" in debugger watch window or command line ',0)
+    
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nftools/wmiQuery/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+![](https://github.com/nftools/wmiQuery/blob/master/wmiquery.jpg)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
