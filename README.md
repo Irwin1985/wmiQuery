@@ -1,6 +1,6 @@
 # WMIQUERY Function
 
-Allows you to get any wmi Query out as a vfp object 
+Allows you to make synchronous Wmi Querys over local PC and get result as a VFP object 
 using a simple function call.
 
      wmiQuery( wmiQuery [, wmiClass] )
