@@ -34,7 +34,7 @@ Object.
     * note:
     * this code uses underscore ( _.prg ) as modern replacement for addproperty()
     * available at https://raw.githubusercontent.com/nftools/underscore/master/_.prg
-    * a traditional version ( "testme_no_" ) using "addobject" is also included 
+    * a regular version ( "testme_no_" ) using "addobject" is also included 
     *---------------------------------------------------------------------------------
     Public oinfo
     
